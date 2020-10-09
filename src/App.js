@@ -1,18 +1,17 @@
-import React from 'react';
-import Box from '@material-ui/core/Box';
-import WhatIsPopular from './components/WhatIsPopular';
+import React from "react";
+import Home from "./components/Home";
 
-
-const Movies = () => {
-  return (
-    <WhatIsPopular />
-  );
-}
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { MovieDetail } from "./components/MovieDetail";
 
 export default function App() {
   return (
-    <Box overflow="hidden">
-      <Movies />
-    </Box>
+    <Router>
+      <Switch>
+        <Route exact path="/" render={() => <Home />} />
+        <Route exact path="/movies/:movieId" component={ MovieDetail } />
+        <Redirect to="/" />
+      </Switch>
+    </Router>
   );
 }
