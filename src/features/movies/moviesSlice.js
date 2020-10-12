@@ -26,7 +26,7 @@ export const fetchMovieById = createAsyncThunk(
         },
       }
     );
-    return response.data;
+    return [response.data];
   }
 );
 
@@ -75,4 +75,4 @@ export const selectAllMovies = (state) => state.movies.movies;
 //   (movies, movieId) => movies.find((movie) => movie.id == movieId)
 // );
 
-export const selectOneMovie = (state) => state.movies.movies;
+//  export const selectOneMovie = (state) => state.movies.movies;

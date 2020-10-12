@@ -4,7 +4,7 @@ import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchMovieById, selectOneMovie } from "../features/movies/moviesSlice";
+import { fetchMovieById } from "../features/movies/moviesSlice";
 import * as Constants from "../common/Constants";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,20 +22,25 @@ export const MovieDetail = ({ match }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("called");
     dispatch(fetchMovieById(movieId));
   }, [movieId, dispatch]);
 
-  const movie = useSelector(selectOneMovie);
-  console.log("hello movie", movie);
+    const movie = useSelector((state) => state.movies.movies.find((movie) => movie.id == movieId))
 
+  if(!movie){
+      return (
+          <section>
+              Loading...
+          </section>
+      )
+  }
 
   return (
     <div>
       {status === "succeeded" ? (
         <Grid container wrap="wrap" justify="center">
           <Grid item xs={12}>
-            This covers poster area
+            NavBar
           </Grid>
           <Grid container justify="center">
             <Grid item xs={3}>
@@ -56,10 +61,10 @@ export const MovieDetail = ({ match }) => {
                 </Grid>
                 <Grid item xs={6}>
                   <Box id="genres">
-                    {movie.genres.map((genre) => genre.name).join(",")}{" "}
+                    {/* {movie.genres.map((genre) => genre.name).join(",")}{" "} */}
                     {Math.floor(movie.runtime / 60) +
-                      ":" +
-                      (movie.runtime % 60)}
+                      "h:" +
+                      (movie.runtime % 60) + "m"}
                   </Box>
                 </Grid>
                 <Grid item xs={6}>
