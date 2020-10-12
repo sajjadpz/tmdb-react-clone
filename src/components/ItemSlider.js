@@ -4,7 +4,6 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { makeStyles } from "@material-ui/core/styles";
-import ModalView from "./ModalView";
 import * as Constants from "../common/Constants";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMovies, selectAllMovies } from "../features/movies/moviesSlice";
@@ -45,15 +44,9 @@ export default function ItemSlider(props) {
     setOpen(false);
   };
 
-  const modalProps = {
-    movieId: movieId,
-    modalOpen: open,
-    modalClose: handleClose,
-  };
-
   return (
     <div className={classes.root}>
-      <ModalView {...modalProps} />
+      {/* <ModalView {...modalProps} /> */}
       {error ? (
         <div>Something went wrong please try again later...</div>
       ) : (
