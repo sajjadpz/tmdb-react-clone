@@ -49,7 +49,6 @@ export default function ItemSlider(props) {
   }
   return (
     <div className={classes.root}>
-      {/* <ModalView {...modalProps} /> */}
       {error ? (
         <div>Something went wrong please try again later...</div>
       ) : (
