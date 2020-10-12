@@ -44,12 +44,8 @@ export default function ItemSlider(props) {
     setOpen(false);
   };
 
-  if(!data){
-    return(
-      <section>
-        Something went wrong, please try again later...
-      </section>
-    )
+  if (!data) {
+    return <section>Something went wrong, please try again later...</section>;
   }
   return (
     <div className={classes.root}>

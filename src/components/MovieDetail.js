@@ -25,23 +25,18 @@ export const MovieDetail = ({ match }) => {
     dispatch(fetchMovieById(movieId));
   }, [movieId, dispatch]);
 
-    const movie = useSelector((state) => state.movies.movies.find((movie) => movie.id == movieId))
+  const movie = useSelector((state) =>
+    state.movies.movies.find((movie) => movie.id == movieId)
+  );
 
-  if(!movie){
-      return (
-          <section>
-              Loading...
-          </section>
-      )
+  if (!movie) {
+    return <section>Loading...</section>;
   }
 
   return (
     <div>
       {status === "succeeded" ? (
         <Grid container wrap="wrap" justify="center">
-          <Grid item xs={12}>
-            NavBar
-          </Grid>
           <Grid container justify="center">
             <Grid item xs={3}>
               <Box>
@@ -64,7 +59,8 @@ export const MovieDetail = ({ match }) => {
                     {/* {movie.genres.map((genre) => genre.name).join(",")}{" "} */}
                     {Math.floor(movie.runtime / 60) +
                       "h:" +
-                      (movie.runtime % 60) + "m"}
+                      (movie.runtime % 60) +
+                      "m"}
                   </Box>
                 </Grid>
                 <Grid item xs={6}>
