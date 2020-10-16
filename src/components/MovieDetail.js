@@ -87,7 +87,7 @@ export const MovieDetail = ({ match }) => {
             <Paper className={classes.paper}>
               <Box component="h2">Top Build Cast</Box>
             </Paper>
-            <CastCardSlider />
+            <CastCardSlider movieId={movieId}/>
           </Grid>
           <Grid item xs={3}>
             <Paper className={classes.paper}>

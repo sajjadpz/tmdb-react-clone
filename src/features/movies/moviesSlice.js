@@ -30,10 +30,26 @@ export const fetchMovieById = createAsyncThunk(
   }
 );
 
+export const fetchMovieCreditsById = createAsyncThunk(
+  "movies/fetchMovieCreditsById",
+  async (movieId) => {
+    const response = await axios.get(
+      Constants.TMDB_API_BASE + "/movie/" + movieId +'/credits',
+      {
+        params: {
+          api_key: `${process.env.REACT_APP_TMDB_API_KEY}`,
+        },
+      }
+    );
+    return response.data;
+  }
+);
+
 const moviesSlice = createSlice({
   name: "movies",
   initialState: {
     movies: [],
+    movieCredits: [],
     status: "idle",
     error: null,
   },
@@ -60,6 +76,10 @@ const moviesSlice = createSlice({
     [fetchMovieById.rejected]: (state, action) => {
       state.status = "failed";
       state.error = action.error.message;
+    },
+    [fetchMovieCreditsById.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.movieCredits = action.payload;
     },
   },
 });
