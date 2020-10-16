@@ -9,6 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMovieCreditsById } from "../features/movies/moviesSlice";
 
+// todo: possiblity to implment it as HOC
+// since this card can be used within component in different ways
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 138,
@@ -25,27 +27,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const CastCardSlider = ({movieId}) => {
+export const CastCardSlider = ({ movieId }) => {
   const classes = useStyles();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchMovieCreditsById(movieId))
-  }, [movieId, dispatch])
+    dispatch(fetchMovieCreditsById(movieId));
+  }, [movieId, dispatch]);
 
-  const movieCredits = useSelector((state) => state.movies.movieCredits.cast)
+  const movieCredits = useSelector((state) => state.movies.movieCredits.cast);
   if (!movieCredits) {
     return <section>Loading...</section>;
   }
 
   return (
-    <Box style={{ flexGrow: 1, maxWidth: '49vw', overflow:'scroll'}}>
-        <Grid container justify="flex-start" style={{minWidth: '64vw'}} spacing={1}>
+    <Box style={{ flexGrow: 1, maxWidth: "49vw", overflow: "scroll" }}>
+      <Grid
+        container
+        justify="flex-start"
+        style={{ minWidth: "64vw" }}
+        spacing={1}
+      >
         {Array.from(movieCredits.slice(0, 7)).map((cast, index) => (
           <Grid item key={index}>
             <Card className={classes.root} variant="outlined">
               <CardMedia>
-                <img src={`https://image.tmdb.org/t/p/w138_and_h175_face${cast.profile_path}`} />
+                <img
+                  src={`https://image.tmdb.org/t/p/w138_and_h175_face${cast.profile_path}`}
+                />
               </CardMedia>
               <CardContent>
                 <Typography color="textPrimary" component="p">
@@ -55,10 +64,8 @@ export const CastCardSlider = ({movieId}) => {
             </Card>
           </Grid>
         ))}
-        <Grid item>
-          View more
-        </Grid>
-    </Grid>
+        <Grid item>View more</Grid>
+      </Grid>
     </Box>
   );
 };

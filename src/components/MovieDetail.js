@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMovieById } from "../features/movies/moviesSlice";
 import * as Constants from "../common/Constants";
 import { CastCardSlider } from "./CastCardSlider";
+import { Sidebar } from "./Sidebar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +38,13 @@ export const MovieDetail = ({ match }) => {
   return (
     <div>
       {status === "succeeded" ? (
-        <Grid container className={classes.root} wrap="wrap" justify="center">
+        <Grid
+          container
+          className={classes.root}
+          wrap="wrap"
+          justify="center"
+          spacing={3}
+        >
           <Grid container justify="center">
             <Grid item xs={3}>
               <Box>
@@ -84,15 +90,14 @@ export const MovieDetail = ({ match }) => {
             </Grid>
           </Grid>
           <Grid item xs={6}>
-            <Paper className={classes.paper}>
-              <Box component="h2">Top Build Cast</Box>
-            </Paper>
-            <CastCardSlider movieId={movieId}/>
+            {/* <Paper className={classes.paper}> */}
+            <Box component="h2">Top Build Cast</Box>
+            {/* </Paper> */}
+            <CastCardSlider movieId={movieId} />
           </Grid>
           <Grid item xs={3}>
-            <Paper className={classes.paper}>
-              <Box component="h2">SideBar</Box>
-            </Paper>
+            <Box component="h2">SideBar</Box>
+            <Sidebar movieId={movieId} />
           </Grid>
         </Grid>
       ) : (

@@ -26,7 +26,9 @@ export const Navbar = () => {
         <Grid item xs={12}>
           <Box>
             <Paper className={classes.paper}>
-              <Box component="h2" style={{color: 'white'}}>The Movie Database (TMDB) Clone</Box>
+              <Box component="h2" style={{ color: "white" }}>
+                The Movie Database (TMDB) Clone
+              </Box>
             </Paper>
           </Box>
         </Grid>
