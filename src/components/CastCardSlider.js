@@ -53,12 +53,19 @@ export const CastCardSlider = ({ movieId }) => {
             <Card className={classes.root} variant="outlined">
               <CardMedia>
                 <img
+                  alt={cast.name}
                   src={`https://image.tmdb.org/t/p/w138_and_h175_face${cast.profile_path}`}
                 />
               </CardMedia>
               <CardContent>
-                <Typography color="textPrimary" component="p">
+                <Typography
+                  align="left"
+                  color="textPrimary"
+                  component="p"
+                  noWrap
+                >
                   {cast.name}
+                  {/* todo: names are truncated due to "noWrap", fix later */}
                 </Typography>
               </CardContent>
             </Card>

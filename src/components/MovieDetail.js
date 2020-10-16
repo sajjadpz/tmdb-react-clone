@@ -7,6 +7,8 @@ import { fetchMovieById } from "../features/movies/moviesSlice";
 import * as Constants from "../common/Constants";
 import { CastCardSlider } from "./CastCardSlider";
 import { Sidebar } from "./Sidebar";
+import { Paper } from "@material-ui/core";
+import { ReviewCard } from "./ReviewCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,6 +38,7 @@ export const MovieDetail = ({ match }) => {
   }
 
   return (
+    // TODO: a bit weird grid arrangement, fix later the root grid cab be eliminated
     <div>
       {status === "succeeded" ? (
         <Grid
@@ -45,7 +48,7 @@ export const MovieDetail = ({ match }) => {
           justify="center"
           spacing={3}
         >
-          <Grid container justify="center">
+          <Grid container justify="center" spacing={0}>
             <Grid item xs={3}>
               <Box>
                 <img
@@ -56,6 +59,7 @@ export const MovieDetail = ({ match }) => {
               </Box>
             </Grid>
             <Grid item xs={6}>
+              {/* Todo:Section not responsive */}
               <Grid container justify="center" direction="column" spacing={2}>
                 <Grid item xs={6}>
                   <Box component="h2" id="title">
@@ -90,10 +94,24 @@ export const MovieDetail = ({ match }) => {
             </Grid>
           </Grid>
           <Grid item xs={6}>
-            {/* <Paper className={classes.paper}> */}
-            <Box component="h2">Top Build Cast</Box>
-            {/* </Paper> */}
-            <CastCardSlider movieId={movieId} />
+            <Grid container direction="column">
+              <Grid item>
+                <Box component="h2">Top Build Cast</Box>
+                <CastCardSlider movieId={movieId} />
+              </Grid>
+              <Grid item>
+                <Box component="h3">Full Cast & Crew</Box>
+              </Grid>
+              <Grid item>
+                <Paper
+                  style={{ diplay: "flex", backgroundColor: "#d3d3d3" }}
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item>
+                <ReviewCard movieId={movieId} />
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={3}>
             <Box component="h2">SideBar</Box>

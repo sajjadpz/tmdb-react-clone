@@ -25,20 +25,38 @@ export const Sidebar = ({ movieId }) => {
   }, [movieId, dispatch]);
 
   const keywords = useSelector((state) => state.movies.keywordsList.keywords);
-  console.log("keywords", keywords);
+  const movie = useSelector((state) =>
+    state.movies.movies.find((movie) => movie.id == movieId)
+  );
 
   if (!keywords) {
     return <section>Loading...</section>;
   }
 
   return (
-    <Grid container>
+    <Grid container direction="column">
+      <Grid item>
+        <Box component="h3">Status</Box>
+        <Box component="span">{movie.status || " - "}</Box>
+      </Grid>
+      <Grid item>
+        <Box component="h3">Original Language</Box>
+        <Box component="span">{movie.original_language || " - "}</Box>
+      </Grid>
+      <Grid item>
+        <Box component="h3">Budget</Box>
+        <Box component="span">{"$" + movie.budget || " - "}</Box>
+      </Grid>
+      <Grid item>
+        <Box component="h3">Reveneu</Box>
+        <Box component="span">{movie.reveneu || " - "}</Box>
+      </Grid>
       <Grid item>
         <Box component="h3">keywords</Box>
       </Grid>
       <Grid item className={classes.root}>
         {keywords.map((kw, index) => (
-          <Chip key={index} label={kw.name} />
+          <Chip variant="default" key={index} label={kw.name} />
         ))}
       </Grid>
     </Grid>
