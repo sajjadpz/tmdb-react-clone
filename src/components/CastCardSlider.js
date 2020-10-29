@@ -8,6 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMovieCreditsById } from "../features/movies/moviesSlice";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 // todo: possiblity to implment it as HOC
 // since this card can be used within component in different ways
@@ -52,10 +53,14 @@ export const CastCardSlider = ({ movieId }) => {
           <Grid item key={index}>
             <Card className={classes.root} variant="outlined">
               <CardMedia>
-                <img
-                  alt={cast.name}
-                  src={`https://image.tmdb.org/t/p/w138_and_h175_face${cast.profile_path}`}
-                />
+                {cast.profile_path ? (
+                  <img
+                    alt={cast.name}
+                    src={`https://image.tmdb.org/t/p/w138_and_h175_face${cast.profile_path}`}
+                  />
+                ) : (
+                  <AccountBoxIcon style={{ fontSize: 140 }} />
+                )}
               </CardMedia>
               <CardContent>
                 <Typography
@@ -65,6 +70,15 @@ export const CastCardSlider = ({ movieId }) => {
                   noWrap
                 >
                   {cast.name}
+                  {/* todo: names are truncated due to "noWrap", fix later */}
+                </Typography>
+                <Typography
+                  align="left"
+                  color="textSecondary"
+                  component="p"
+                  noWrap
+                >
+                  {cast.character}
                   {/* todo: names are truncated due to "noWrap", fix later */}
                 </Typography>
               </CardContent>

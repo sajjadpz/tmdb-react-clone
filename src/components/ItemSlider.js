@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -28,21 +28,9 @@ export default function ItemSlider(props) {
   const movieStatus = useSelector((state) => state.movies.status);
   const error = useSelector((state) => state.movies.error);
 
-  const [movieId, setMovieId] = useState();
-  const [open, setOpen] = useState(false);
-
   useEffect(() => {
     dispatch(fetchMovies(props.val));
   }, [props, dispatch]);
-
-  const handleImageClick = (movieId) => {
-    setMovieId(movieId);
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   if (!data) {
     return <section>Something went wrong, please try again later...</section>;
