@@ -1,4 +1,5 @@
-require('dotenv').config();
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '.env') })
 
 const { RESTDataSource } = require("apollo-datasource-rest");
 
@@ -10,19 +11,17 @@ class TmdbAPI extends RESTDataSource {
   }
 
   async getAllMovies() {
-      console.log("called getAllMovies");
     const response = await this.get(this.uri, {
-      params: { api_key: `${process.env.REACT_APP_TMDB_API_KEY}` },
+      api_key: `${process.env.TMDB_API_KEY}`,
     });
-    return Array.isArray(response.data.results)
-      ? response.map((movie) => this.movieReducer(movie))
+    return Array.isArray(response.results)
+      ? response.results.map((movie) => this.movieReducer(movie))
       : [];
   }
 
   async getMovieById({ movieId }) {
-    console.log("getMovieById");
     const res = await this.get(`/movie/${movieId}`, {
-        params: { api_key: `${process.env.REACT_APP_TMDB_API_KEY}` },
+      api_key: `${process.env.TMDB_API_KEY}`,
     });
     return this.movieReducer(res);
   }

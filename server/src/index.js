@@ -1,11 +1,11 @@
 const { ApolloServer } = require("apollo-server");
 const typeDefs = require("./schema");
-const resolver = require("./resolver");
+const resolvers = require("./resolvers");
 const TmdbAPI = require("./tmdb");
 
 const server = new ApolloServer({
   typeDefs,
-  resolver,
+  resolvers,
   dataSources: () => ({
     tmdbAPI: new TmdbAPI(),
   }),

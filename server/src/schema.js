@@ -2,7 +2,7 @@ const { gql } = require("apollo-server");
 
 const typeDefs = gql`
   type Query {
-    movies: MovieResult!
+    movies: [Movie]
     movie(id: ID): Movie
   }
 
@@ -18,10 +18,6 @@ const typeDefs = gql`
   type Genre {
     id: ID
     name: String
-  }
-
-  type MovieResult {
-    movies: [Movie]
   }
 `;
 
